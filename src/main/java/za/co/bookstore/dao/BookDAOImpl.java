@@ -20,8 +20,8 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public Book getBookById(Long currencyId) {
-        return bookRepository.findById(currencyId).get();
+    public Book getBookById(Long bookId) {
+        return bookRepository.findById(bookId).get();
     }
 
     @Override
@@ -30,8 +30,8 @@ public class BookDAOImpl implements BookDAO {
     }
 
     @Override
-    public void deleteBook(Long currencyId) {
-        bookRepository.deleteById(currencyId);
+    public void deleteBook(Long bookId) {
+        bookRepository.deleteById(bookId);
     }
 
 
