@@ -9,17 +9,17 @@ import javax.persistence.*;
 @ToString
 @NoArgsConstructor
 @Entity(name = "ForeignKeyAssoAuthortEntity")
-@Table(name = "BOOK_AUTHOR")
+@Table(name = "AUTHOR")
 @AllArgsConstructor
 @Builder
-public class BookAuthor {
+public class Author {
     @Id
-    @Column(name = "BOOK_AUTHOR_ID", nullable = false)
+    @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long bookAuthorId;
+    private Long authorId;
 
-    @Column(name = "BOOK_ID", nullable = true)
-    private Long bookId;
+    @Column(name = "AUTHOR_NAME")
+    private String authorName;
 
     @ManyToOne
     private Book book;

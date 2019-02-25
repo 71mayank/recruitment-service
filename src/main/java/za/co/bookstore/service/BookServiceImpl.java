@@ -10,6 +10,8 @@ import za.co.bookstore.dto.BookDTO;
 import za.co.bookstore.model.Book;
 import za.co.bookstore.response.BookResponse;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class BookServiceImpl implements BookService {
@@ -23,6 +25,11 @@ public class BookServiceImpl implements BookService {
         Book book = new Book();
         bookDAOImpl.saveBook(book);
         return new ResponseEntity<>(new BookResponse(), HttpStatus.OK);
+    }
+
+    @Override
+    public List<Book> getAllBooks() {
+        return bookDAOImpl.getAllBooks();
     }
 
 

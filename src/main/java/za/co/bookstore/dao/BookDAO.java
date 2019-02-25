@@ -12,6 +12,6 @@ public interface BookDAO {
 
     Book getBookById(Long bookId);
 
-    public void deleteBook(Long bookId);
+    void deleteBook(Long bookId);
 
 }

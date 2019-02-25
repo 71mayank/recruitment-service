@@ -9,7 +9,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 import za.co.bookstore.model.Book;
-import za.co.bookstore.model.BookAuthor;
+import za.co.bookstore.model.Author;
 import za.co.bookstore.model.BookCategory;
 import za.co.bookstore.model.BookTitle;
 
@@ -44,15 +44,16 @@ public class BookRepositoryIntegrationTest {
     }
 
     private Book buildBook() {
-        Set authors = new HashSet<BookAuthor>();
-        authors.add(BookAuthor.builder().bookAuthorId(1L).build());
+        /*Set authors = new HashSet<Author>();
+        authors.add(Author.builder().id(1L).build());
         return Book.builder()
                 .authors(authors)
-                .bookCategory(BookCategory.builder().bookCategory("cooking").bookCategoryId(1L).build())
+                .bookCategory(BookCategory.builder().bookCategory("cooking").id(1L).build())
                 .bookPrice(200.0)
                 .bookYear("2010")
-                .bookTitle(BookTitle.builder().bookTitle("Everyday Italian").bookTitleLang("en").bookTitleId(1L).build())
-                .build();
+                .bookTitle(BookTitle.builder().bookTitle("Everyday Italian").bookTitleLang("en").id(1L).build())
+                .build();*/
+        return null;
     }
 }
 

@@ -21,7 +21,7 @@ import java.util.List;
         "title_lang",
         "year",
         "price",
-        "authorDTOS"
+        "authors"
 })
 public class BookDTO {
     @JsonProperty("category")
@@ -39,6 +39,6 @@ public class BookDTO {
     @JsonProperty("price")
     private Double price;
 
-    @JsonProperty("authorDTOS")
-    private List<AuthorDTO> authorDTOS;
+    @JsonProperty("authors")
+    private String authorDTOS;
 }

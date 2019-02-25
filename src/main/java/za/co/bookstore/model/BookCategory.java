@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Builder
 public class BookCategory {
     @Id
-    @Column(name = "BOOK_CATEGORY_ID", nullable = false)
+    @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long bookCategoryId;
 

@@ -7,7 +7,6 @@ import java.util.Set;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @Entity(name = "ForeignKeyAssoBookEntity")
 @Table(name = "BOOK")
@@ -15,9 +14,9 @@ import java.util.Set;
 @AllArgsConstructor
 public class Book {
     @Id
-    @Column(name = "BOOK_ID", nullable = false)
+    @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long bookId;
 
     @OneToOne(cascade = CascadeType.ALL)
     private BookCategory bookCategory;
@@ -33,6 +32,6 @@ public class Book {
 
     @OneToMany(cascade=CascadeType.ALL)
     @JoinColumn(name="BOOK_ID")
-    private Set<BookAuthor> authors;
+    private Set<Author> authors;
 
 }
