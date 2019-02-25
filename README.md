@@ -1,4 +1,4 @@
-"# book-store-service" 
+# book-store-service
 
 **Steps to Run**
     
