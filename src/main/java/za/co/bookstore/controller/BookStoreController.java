@@ -2,7 +2,6 @@ package za.co.bookstore.controller;
 
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +10,6 @@ import za.co.bookstore.dto.BookDTO;
 import za.co.bookstore.response.BookResponse;
 import za.co.bookstore.service.BookServiceImpl;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -30,7 +28,7 @@ public class BookStoreController {
             @ApiResponse(code = 404, message = "The book store you were trying to reach is not found")
     })
     @PostMapping(value = "/saveBook", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BookResponse> getLatestRates(@RequestBody BookDTO bookDTO) {
+    public ResponseEntity<BookResponse> saveBook(@RequestBody BookDTO bookDTO) {
         return bookServiceImpl.saveBook(bookDTO);
     }
 
