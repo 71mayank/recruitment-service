@@ -9,8 +9,8 @@ public interface ApplicationDAO {
 
     List<Application> getAllApplications();
 
-    Application getApplicationById(Long applicationId);
+    Application getApplicationByIdPerOffer(Long applicationId, Long offerId);
 
-    void deleteApplication(Long applicationId);
+    List<Application> getApplicationsByOfferId(Long offerId);
 
 }

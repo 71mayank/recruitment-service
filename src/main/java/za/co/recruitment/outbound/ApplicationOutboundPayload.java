@@ -21,8 +21,11 @@ import lombok.*;
 
 public class ApplicationOutboundPayload {
 
+    @JsonProperty("applicationId")
+    private Long applicationId;
+
     @JsonProperty("relatedOffer")
-    private String relatedOffer;
+    private Long relatedOffer;
 
     @JsonProperty("candidateEmail")
     private String candidateEmail;

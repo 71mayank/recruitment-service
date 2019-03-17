@@ -17,16 +17,16 @@ public class Application {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "RELATED_OFFER")
-    private String relatedOffer;
+    @Column(name = "RELATED_OFFER", nullable = false)
+    private Long relatedOffer;
 
-    @Column(name = "CANDIDATE_EMAIL")
+    @Column(name = "CANDIDATE_EMAIL", nullable = false)
     private String candidateEmail;
 
-    @Column(name = "RESUME_TEXT")
+    @Column(name = "RESUME_TEXT", nullable = false)
     private String resumeText;
 
-    @Column(name = "APPLICATION_STATUS")
+    @Column(name = "APPLICATION_STATUS", nullable = false)
     private String applicationStatus;
 
 }

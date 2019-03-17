@@ -17,6 +17,9 @@ public class Offer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column(name = "JOB_TITLE")
+    private String jobTitle;
+
     @Column(name = "START_DATE")
     private LocalDateTime startDate;
 

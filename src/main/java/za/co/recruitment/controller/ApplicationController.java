@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import za.co.recruitment.inbound.ApplicationInboundPayload;
 import za.co.recruitment.outbound.ApplicationOutboundPayload;
 import za.co.recruitment.service.impl.ApplicationServiceImpl;
-
 import java.util.List;
 
 @RestController
@@ -30,7 +29,7 @@ public class ApplicationController {
     })
     @PostMapping(value = "/applyForAnOffer", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ApplicationOutboundPayload> applyForAnOffer(@RequestBody ApplicationInboundPayload applicationInboundPayload) {
-        return new ResponseEntity<>((ApplicationOutboundPayload) null, HttpStatus.OK);
+        return new ResponseEntity<>(applicationService.applyForAnOffer(applicationInboundPayload), HttpStatus.OK);
     }
 
 
@@ -45,7 +44,7 @@ public class ApplicationController {
                                                                               @RequestParam(value = "offerId") Long offerId,
                                                                               @ApiParam(value = "applicationId", required = true)
                                                                               @RequestParam(value = "applicationId") Long applicationId) {
-        return new ResponseEntity<>((ApplicationOutboundPayload) null, HttpStatus.OK);
+        return new ResponseEntity<>(applicationService.getApplicationByIdPerOffer(applicationId,offerId), HttpStatus.OK);
     }
 
     @ApiOperation(value = "List all applications per offer", response = List.class)
@@ -55,9 +54,9 @@ public class ApplicationController {
             @ApiResponse(code = 404, message = "The application you were trying to find is not found")
     })
     @GetMapping("/listAllApplicationsPerOffer")
-    public ResponseEntity<ApplicationOutboundPayload> listAllApplicationsPerOffer(@ApiParam(value = "offerId", required = true)
+    public ResponseEntity<List<ApplicationOutboundPayload>> listAllApplicationsPerOffer(@ApiParam(value = "offerId", required = true)
                                                                                   @RequestParam(value = "offerId") Long offerId) {
-        return new ResponseEntity<>((ApplicationOutboundPayload) null, HttpStatus.OK);
+        return new ResponseEntity<>(applicationService.getApplicationsByOfferId(offerId), HttpStatus.OK);
     }
 
 

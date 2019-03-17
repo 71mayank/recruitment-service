@@ -1,17 +1,16 @@
 package za.co.recruitment.service;
 
-
-import za.co.recruitment.model.Offer;
+import za.co.recruitment.inbound.OfferInboundPayload;
+import za.co.recruitment.outbound.OfferOutboundPayload;
 
 import java.util.List;
 
 public interface OfferService {
 
-    Offer saveOffer(Offer offer);
+    OfferOutboundPayload saveOffer(OfferInboundPayload offerInboundPayload);
 
-    List<Offer> getOffers();
+    List<OfferOutboundPayload> getOffers();
 
-    Offer getOfferById(Long offerId);
+    OfferOutboundPayload getOfferById(Long offerId);
 
-    void deleteOffer(Long offerId);
 }

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 import za.co.recruitment.dao.OfferDAO;
 import za.co.recruitment.model.Offer;
 import za.co.recruitment.repository.OfferRepository;
-
 import javax.transaction.Transactional;
 import java.util.List;
 

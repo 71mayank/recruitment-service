@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -19,13 +20,17 @@ import lombok.Setter;
         "numberOfApplications"
 })
 public class OfferOutboundPayload {
+
+    @JsonProperty("offerId")
+    private Long offerId;
+
     @JsonProperty("jobTitle")
     private String jobTitle;
 
     @JsonProperty("startDate")
-    private String startDate;
+    private LocalDateTime startDate;
 
     @JsonProperty("numberOfApplications")
-    private String numberOfApplications;
+    private Long numberOfApplications;
 
 }

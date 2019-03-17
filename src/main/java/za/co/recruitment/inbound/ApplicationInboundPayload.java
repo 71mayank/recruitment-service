@@ -25,7 +25,7 @@ import lombok.Setter;
 public class ApplicationInboundPayload {
 
     @JsonProperty("relatedOffer")
-    private String relatedOffer;
+    private Long relatedOffer;
 
     @JsonProperty("candidateEmail")
     private String candidateEmail;

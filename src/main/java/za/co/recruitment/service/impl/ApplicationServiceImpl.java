@@ -1,38 +1,39 @@
 package za.co.recruitment.service.impl;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import za.co.recruitment.dao.impl.ApplicationDAOImpl;
-import za.co.recruitment.model.Application;
+import za.co.recruitment.inbound.ApplicationInboundPayload;
+import za.co.recruitment.outbound.ApplicationOutboundPayload;
+import za.co.recruitment.processor.ApplicationProcessor;
 import za.co.recruitment.service.ApplicationService;
 import java.util.List;
 
 @Service
-@Slf4j
 public class ApplicationServiceImpl implements ApplicationService {
 
     @Autowired
-    private ApplicationDAOImpl applicationDAOImpl;
+    ApplicationProcessor applicationProcessor;
 
 
     @Override
-    public Application saveApplication(Application application) {
-        return applicationDAOImpl.saveApplication(application);
+    public ApplicationOutboundPayload applyForAnOffer(ApplicationInboundPayload applicationInboundPayload) {
+        return applicationProcessor.applyForAnOffer(applicationInboundPayload);
     }
 
     @Override
-    public List<Application> getAllApplications() {
-        return applicationDAOImpl.getAllApplications();
+    public List<ApplicationOutboundPayload> getAllApplications() {
+        return applicationProcessor.getAllApplications();
     }
 
     @Override
-    public Application getApplicationById(Long applicationId) {
-        return applicationDAOImpl.getApplicationById(applicationId);
+    public ApplicationOutboundPayload getApplicationByIdPerOffer(Long applicationId, Long offerId) {
+        return applicationProcessor.getApplicationByIdPerOffer(applicationId, offerId);
     }
 
     @Override
-    public void deleteApplication(Long applicationId) {
-        applicationDAOImpl.deleteApplication(applicationId);
+    public List<ApplicationOutboundPayload> getApplicationsByOfferId(Long offerId) {
+        return applicationProcessor.getApplicationsByOfferId(offerId);
     }
+
+
 }

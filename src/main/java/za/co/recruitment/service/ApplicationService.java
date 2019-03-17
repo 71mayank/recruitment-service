@@ -1,15 +1,17 @@
 package za.co.recruitment.service;
 
-import za.co.recruitment.model.Application;
+import za.co.recruitment.inbound.ApplicationInboundPayload;
+import za.co.recruitment.outbound.ApplicationOutboundPayload;
 import java.util.List;
 
 public interface ApplicationService {
 
-    Application saveApplication(Application application);
+    ApplicationOutboundPayload applyForAnOffer(ApplicationInboundPayload applicationInboundPayload);
 
-    List<Application> getAllApplications();
+    List<ApplicationOutboundPayload> getAllApplications();
 
-    Application getApplicationById(Long applicationId);
+    ApplicationOutboundPayload getApplicationByIdPerOffer(Long applicationId,Long offerId);
 
-    void deleteApplication(Long applicationId);
+    List<ApplicationOutboundPayload> getApplicationsByOfferId(Long offerId);
+
 }
