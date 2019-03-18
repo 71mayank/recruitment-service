@@ -11,6 +11,5 @@ public interface OfferDAO {
 
     Offer getOfferById(Long offerId);
 
-    void deleteOffer(Long offerId);
-
+    Offer getOfferByJobTitle(String  jobTitle);
 }

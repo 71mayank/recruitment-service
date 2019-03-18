@@ -2,13 +2,13 @@ package za.co.recruitment.controller;
 
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.co.recruitment.inbound.OfferInboundPayload;
 import za.co.recruitment.outbound.OfferOutboundPayload;
 import za.co.recruitment.service.impl.OfferServiceImpl;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,36 +22,33 @@ public class OfferController {
     @ApiOperation(value = "Add offer to the recruitment", response = List.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully added job offer"),
-            @ApiResponse(code = 401, message = "You are not authorized to add offer"),
-            @ApiResponse(code = 403, message = "Access to the offer you were trying is forbidden"),
-            @ApiResponse(code = 404, message = "The offer you were trying to reach is not found")
+            @ApiResponse(code = 409, message = "Conflict JobTitle already exists")
     })
     @PostMapping(value = "/createJobOffer", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<OfferOutboundPayload> createJobOffer(@RequestBody OfferInboundPayload offerInboundPayload) {
-        return new ResponseEntity<>(offerServiceImpl.saveOffer(offerInboundPayload), HttpStatus.OK);
+    public ResponseEntity<OfferOutboundPayload> createJobOffer(@Valid @RequestBody OfferInboundPayload offerInboundPayload) {
+        return offerServiceImpl.saveOffer(offerInboundPayload);
     }
 
     @ApiOperation(value = "Read a single offer", response = List.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved offer"),
-            @ApiResponse(code = 403, message = "Access to the offer you were trying is forbidden"),
-            @ApiResponse(code = 404, message = "The offer you were trying to reach is not found")
+            @ApiResponse(code = 400, message = "Bad Request")
+
     })
     @GetMapping("/getOfferById")
     public ResponseEntity<OfferOutboundPayload> getOfferById(@ApiParam(value = "offerId", required = true)
                                                              @RequestParam(value = "offerId") Long offerId) {
-        return new ResponseEntity<>(offerServiceImpl.getOfferById(offerId), HttpStatus.OK);
+        return offerServiceImpl.getOfferById(offerId);
     }
 
     @ApiOperation(value = "List all offer", response = List.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved all offer"),
-            @ApiResponse(code = 403, message = "Access to the offer you were trying is forbidden"),
-            @ApiResponse(code = 404, message = "The offer you were trying to reach is not found")
+            @ApiResponse(code = 400, message = "Bad Request")
     })
     @GetMapping("/getAllOffers")
     public ResponseEntity<List<OfferOutboundPayload>> getAllOffers() {
-        return new ResponseEntity<>(offerServiceImpl.getOffers(), HttpStatus.OK);
+        return offerServiceImpl.getOffers();
     }
 
 }

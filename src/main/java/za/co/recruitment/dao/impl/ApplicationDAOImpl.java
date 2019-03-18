@@ -36,5 +36,21 @@ public class ApplicationDAOImpl implements ApplicationDAO {
         return applicationRepository.getApplicationsByOfferId(offerId);
     }
 
+    @Override
+    public Application getApplicationByEmailPerOffer(String candidateEmail,Long offerId) {
+        return applicationRepository.getApplicationByEmailPerOffer(candidateEmail,offerId);
+    }
 
+    @Override
+    public Application updateApplicationStatus(String newApplicationStatus, Long applicationId) {
+        Application application = applicationRepository.findById(applicationId).get();
+        application.setApplicationStatus(newApplicationStatus);
+        applicationRepository.save(application);
+        return application;
+    }
+
+    @Override
+    public Application getApplicationById(Long applicationId) {
+        return applicationRepository.findById(applicationId).get();
+    }
 }

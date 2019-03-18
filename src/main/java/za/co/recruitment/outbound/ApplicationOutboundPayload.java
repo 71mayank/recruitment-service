@@ -36,4 +36,7 @@ public class ApplicationOutboundPayload {
     @JsonProperty("applicationStatus")
     private String applicationStatus;
 
+    @JsonProperty("responseMessage")
+    private String responseMessage;
+
 }

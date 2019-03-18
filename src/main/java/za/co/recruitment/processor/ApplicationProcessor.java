@@ -2,6 +2,7 @@ package za.co.recruitment.processor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import za.co.recruitment.constant.RecruitmentConstant;
 import za.co.recruitment.dao.impl.ApplicationDAOImpl;
 import za.co.recruitment.enumeration.ApplicationEnum;
 import za.co.recruitment.inbound.ApplicationInboundPayload;
@@ -18,8 +19,8 @@ public class ApplicationProcessor {
 
 
     public ApplicationOutboundPayload applyForAnOffer(ApplicationInboundPayload applicationInboundPayload) {
-        applicationInboundPayload.setApplicationStatus(ApplicationEnum.APPLIED.name());
-        return mapApplicationEntityToApplicationOutboundPayload(applicationDAOImpl.saveApplication(buildApplication(applicationInboundPayload)));
+            applicationInboundPayload.setApplicationStatus(ApplicationEnum.APPLIED.name());
+            return mapApplicationEntityToApplicationOutboundPayload(applicationDAOImpl.saveApplication(buildApplication(applicationInboundPayload)));
     }
 
     private ApplicationOutboundPayload mapApplicationEntityToApplicationOutboundPayload(Application application) {
@@ -29,6 +30,7 @@ public class ApplicationProcessor {
                 .candidateEmail(application.getCandidateEmail())
                 .relatedOffer(application.getRelatedOffer())
                 .resumeText(application.getResumeText())
+                .responseMessage(RecruitmentConstant.APPLICATION_CREATED)
                 .build();
     }
 
@@ -49,6 +51,10 @@ public class ApplicationProcessor {
 
     public List<ApplicationOutboundPayload> getApplicationsByOfferId(Long offerId) {
         return applicationDAOImpl.getApplicationsByOfferId(offerId).stream().map(this::mapApplicationEntityToApplicationOutboundPayload).collect(Collectors.toList());
+    }
+
+    public ApplicationOutboundPayload updateApplicationStatus(String newApplicationStatus, Long applicationId){
+        return mapApplicationEntityToApplicationOutboundPayload(applicationDAOImpl.updateApplicationStatus(newApplicationStatus,applicationId));
     }
 
     public ApplicationOutboundPayload getApplicationByIdPerOffer(Long applicationId, Long offerId){

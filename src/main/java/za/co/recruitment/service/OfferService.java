@@ -1,16 +1,16 @@
 package za.co.recruitment.service;
 
+import org.springframework.http.ResponseEntity;
 import za.co.recruitment.inbound.OfferInboundPayload;
 import za.co.recruitment.outbound.OfferOutboundPayload;
-
 import java.util.List;
 
 public interface OfferService {
 
-    OfferOutboundPayload saveOffer(OfferInboundPayload offerInboundPayload);
+    ResponseEntity<OfferOutboundPayload> saveOffer(OfferInboundPayload offerInboundPayload);
 
-    List<OfferOutboundPayload> getOffers();
+    ResponseEntity<List<OfferOutboundPayload>> getOffers();
 
-    OfferOutboundPayload getOfferById(Long offerId);
+    ResponseEntity<OfferOutboundPayload> getOfferById(Long offerId);
 
 }

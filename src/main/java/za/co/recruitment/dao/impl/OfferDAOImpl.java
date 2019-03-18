@@ -15,7 +15,6 @@ public class OfferDAOImpl implements OfferDAO {
     @Autowired
     private OfferRepository offerRepository;
 
-
     @Override
     public Offer saveOffer(Offer offer) {
         return offerRepository.save(offer);
@@ -28,11 +27,13 @@ public class OfferDAOImpl implements OfferDAO {
 
     @Override
     public Offer getOfferById(Long offerId) {
-        return offerRepository.getOne(offerId);
+        return offerRepository.findById(offerId).get();
     }
 
     @Override
-    public void deleteOffer(Long offerId) {
-        offerRepository.deleteById(offerId);
+    public Offer getOfferByJobTitle(String jobTitle) {
+        return offerRepository.getOfferByJobTitle(jobTitle);
     }
+
+
 }

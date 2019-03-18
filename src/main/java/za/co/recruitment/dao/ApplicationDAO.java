@@ -13,4 +13,10 @@ public interface ApplicationDAO {
 
     List<Application> getApplicationsByOfferId(Long offerId);
 
+    Application getApplicationByEmailPerOffer(String candidateEmail, Long offerId);
+
+    Application updateApplicationStatus(String newApplicationStatus,Long applicationId);
+
+    Application getApplicationById(Long applicationId);
+
 }

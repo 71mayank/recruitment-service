@@ -33,4 +33,7 @@ public class OfferOutboundPayload {
     @JsonProperty("numberOfApplications")
     private Long numberOfApplications;
 
+    @JsonProperty("responseMessage")
+    private String responseMessage;
+
 }

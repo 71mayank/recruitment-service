@@ -2,6 +2,7 @@ package za.co.recruitment.processor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import za.co.recruitment.constant.RecruitmentConstant;
 import za.co.recruitment.dao.impl.OfferDAOImpl;
 import za.co.recruitment.inbound.OfferInboundPayload;
 import za.co.recruitment.model.Offer;
@@ -35,6 +36,7 @@ public class OfferProcessor {
                 .jobTitle(offer.getJobTitle())
                 .numberOfApplications(offer.getNumberOfApplications())
                 .startDate(offer.getStartDate())
+                .responseMessage(RecruitmentConstant.JOB_OFFER_CREATED)
                 .build();
     }
 
