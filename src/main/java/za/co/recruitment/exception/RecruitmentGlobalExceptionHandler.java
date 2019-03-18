@@ -11,8 +11,8 @@ import org.springframework.web.context.request.WebRequest;
 @ControllerAdvice
 public class RecruitmentGlobalExceptionHandler {
 
-    @ExceptionHandler(OfferNotFoundException.class)
-    public ResponseEntity<?> resourceNotFoundException(OfferNotFoundException ex, WebRequest request) {
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<?> resourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
         RecruitmentErrorDetails recruitmentErrorDetails = new RecruitmentErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
         return new ResponseEntity<>(recruitmentErrorDetails, HttpStatus.NOT_FOUND);
     }
