@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import za.co.recruitment.constant.RecruitmentConstant;
 import za.co.recruitment.dao.impl.ApplicationDAOImpl;
 import za.co.recruitment.enumeration.ApplicationEnum;
+import za.co.recruitment.gateway.EmailGateway;
 import za.co.recruitment.inbound.ApplicationInboundPayload;
 import za.co.recruitment.model.Application;
 import za.co.recruitment.outbound.ApplicationOutboundPayload;
@@ -16,6 +17,9 @@ public class ApplicationProcessor {
 
     @Autowired
     private ApplicationDAOImpl applicationDAOImpl;
+
+    @Autowired
+    EmailGateway emailGateway;
 
 
     public ApplicationOutboundPayload applyForAnOffer(ApplicationInboundPayload applicationInboundPayload) {
@@ -54,7 +58,9 @@ public class ApplicationProcessor {
     }
 
     public ApplicationOutboundPayload updateApplicationStatus(String newApplicationStatus, Long applicationId){
-        return mapApplicationEntityToApplicationOutboundPayload(applicationDAOImpl.updateApplicationStatus(newApplicationStatus,applicationId));
+        Application application = applicationDAOImpl.updateApplicationStatus(newApplicationStatus, applicationId);
+        emailGateway.sendEmailNotification(application.getCandidateEmail(),application.getApplicationStatus());
+        return mapApplicationEntityToApplicationOutboundPayload(application);
     }
 
     public ApplicationOutboundPayload getApplicationByIdPerOffer(Long applicationId, Long offerId){

@@ -70,7 +70,8 @@ public class ApplicationServiceImpl implements ApplicationService {
         try {
             if (applicationValidator.isApplicationExists(applicationId)) {
                 if (applicationValidator.newStatusExistsInAvailableStatuses(newApplicationStatus.toUpperCase())) {
-                    return new ResponseEntity<>(applicationProcessor.updateApplicationStatus(newApplicationStatus, applicationId), HttpStatus.OK);
+                    ApplicationOutboundPayload applicationOutboundPayload = applicationProcessor.updateApplicationStatus(newApplicationStatus.toUpperCase(), applicationId);
+                    return new ResponseEntity<>(applicationOutboundPayload, HttpStatus.OK);
                 } else {
                     return new ResponseEntity<>(ApplicationOutboundPayload.builder().responseMessage(RecruitmentConstant.VALID_APPLICATION_STATUS).build(), HttpStatus.BAD_REQUEST);
                 }
