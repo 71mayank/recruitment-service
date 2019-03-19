@@ -10,8 +10,8 @@ import za.co.recruitment.outbound.ApplicationOutboundPayload;
 import za.co.recruitment.processor.ApplicationProcessor;
 import za.co.recruitment.service.ApplicationService;
 import za.co.recruitment.validator.ApplicationValidator;
-
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ApplicationServiceImpl implements ApplicationService {
@@ -50,7 +50,12 @@ public class ApplicationServiceImpl implements ApplicationService {
     @Override
     public ResponseEntity<ApplicationOutboundPayload> getApplicationByIdPerOffer(Long applicationId, Long offerId) {
         try {
-            return new ResponseEntity<>(applicationProcessor.getApplicationByIdPerOffer(applicationId, offerId), HttpStatus.OK);
+            ApplicationOutboundPayload applicationOutboundPayload = applicationProcessor.getApplicationByIdPerOffer(applicationId, offerId);
+            if(Objects.nonNull(applicationOutboundPayload)) {
+                return new ResponseEntity<>(applicationOutboundPayload, HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(ApplicationOutboundPayload.builder().responseMessage(RecruitmentConstant.APPLICATION_NOT_EXISTS_FOR_OFFER).build(), HttpStatus.OK);
+            }
         } catch (Exception e) {
             return new ResponseEntity<>(ApplicationOutboundPayload.builder().responseMessage(e.getMessage()).build(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -70,8 +75,7 @@ public class ApplicationServiceImpl implements ApplicationService {
         try {
             if (applicationValidator.isApplicationExists(applicationId)) {
                 if (applicationValidator.newStatusExistsInAvailableStatuses(newApplicationStatus.toUpperCase())) {
-                    ApplicationOutboundPayload applicationOutboundPayload = applicationProcessor.updateApplicationStatus(newApplicationStatus.toUpperCase(), applicationId);
-                    return new ResponseEntity<>(applicationOutboundPayload, HttpStatus.OK);
+                    return new ResponseEntity<>(applicationProcessor.updateApplicationStatus(newApplicationStatus.toUpperCase(), applicationId), HttpStatus.OK);
                 } else {
                     return new ResponseEntity<>(ApplicationOutboundPayload.builder().responseMessage(RecruitmentConstant.VALID_APPLICATION_STATUS).build(), HttpStatus.BAD_REQUEST);
                 }

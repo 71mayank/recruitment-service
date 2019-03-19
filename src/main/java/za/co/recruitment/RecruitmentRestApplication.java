@@ -8,5 +8,4 @@ public class RecruitmentRestApplication {
     public static void main(String[] args) {
         SpringApplication.run(RecruitmentRestApplication.class, args);
     }
-
 }

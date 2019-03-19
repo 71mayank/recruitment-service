@@ -19,7 +19,7 @@ public class OfferController {
     @Autowired
     OfferServiceImpl offerServiceImpl;
 
-    @ApiOperation(value = "Add offer to the recruitment", response = List.class)
+    @ApiOperation(value = "Add an offer", response = OfferOutboundPayload.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully added job offer"),
             @ApiResponse(code = 409, message = "Conflict JobTitle already exists")
@@ -29,7 +29,7 @@ public class OfferController {
         return offerServiceImpl.saveOffer(offerInboundPayload);
     }
 
-    @ApiOperation(value = "Read a single offer", response = List.class)
+    @ApiOperation(value = "Read single offer", response = OfferOutboundPayload.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved offer"),
             @ApiResponse(code = 400, message = "Bad Request")
@@ -41,7 +41,7 @@ public class OfferController {
         return offerServiceImpl.getOfferById(offerId);
     }
 
-    @ApiOperation(value = "List all offer", response = List.class)
+    @ApiOperation(value = "List all offers", response = List.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved all offer"),
             @ApiResponse(code = 400, message = "Bad Request")

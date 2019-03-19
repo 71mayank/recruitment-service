@@ -21,7 +21,7 @@ public class ApplicationController {
     ApplicationServiceImpl applicationServiceImpl;
 
 
-    @ApiOperation(value = "Apply for an offer", response = List.class)
+    @ApiOperation(value = "Apply for an offer", response = ApplicationOutboundPayload.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully applied for an offer"),
             @ApiResponse(code = 400, message = "Bad Request"),
@@ -33,7 +33,7 @@ public class ApplicationController {
     }
 
 
-    @ApiOperation(value = "Read one application per offer", response = List.class)
+    @ApiOperation(value = "Read single application per offer", response = ApplicationOutboundPayload.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved all offer"),
             @ApiResponse(code = 400, message = "Bad Request")
@@ -58,16 +58,20 @@ public class ApplicationController {
     }
 
 
-    @ApiOperation(value = "List all applications per offer", response = List.class)
+    @ApiOperation(value = "List all existing applications", response = List.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Successfully retrieved all applications per offer")
+            @ApiResponse(code = 200, message = "Successfully retrieved all applications")
     })
     @GetMapping("/trackAllApplications")
     public ResponseEntity<List<ApplicationOutboundPayload>> getAllApplications() {
         return applicationServiceImpl.getAllApplications();
     }
 
-
+    @ApiOperation(value = "Update application status", response = ApplicationOutboundPayload.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully updated applications status for candidate"),
+            @ApiResponse(code = 400, message = "Bad Request")
+    })
     @PutMapping("/updateApplicationStatus/{applicationId}")
     public ResponseEntity<ApplicationOutboundPayload> updateApplicationStatus(@Valid @RequestParam String newApplicationStatus, @PathVariable Long applicationId) {
         return applicationServiceImpl.updateApplicationStatus(newApplicationStatus, applicationId);

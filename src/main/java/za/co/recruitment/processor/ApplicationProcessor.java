@@ -10,6 +10,7 @@ import za.co.recruitment.inbound.ApplicationInboundPayload;
 import za.co.recruitment.model.Application;
 import za.co.recruitment.outbound.ApplicationOutboundPayload;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Component
@@ -28,14 +29,18 @@ public class ApplicationProcessor {
     }
 
     private ApplicationOutboundPayload mapApplicationEntityToApplicationOutboundPayload(Application application) {
-        return   ApplicationOutboundPayload.builder()
-                .applicationId(application.getId())
-                .applicationStatus(application.getApplicationStatus())
-                .candidateEmail(application.getCandidateEmail())
-                .relatedOffer(application.getRelatedOffer())
-                .resumeText(application.getResumeText())
-                .responseMessage(RecruitmentConstant.APPLICATION_CREATED)
-                .build();
+        if(Objects.nonNull(application)){
+            return ApplicationOutboundPayload.builder()
+                    .applicationId(application.getId())
+                    .applicationStatus(application.getApplicationStatus())
+                    .candidateEmail(application.getCandidateEmail())
+                    .relatedOffer(application.getRelatedOffer())
+                    .resumeText(application.getResumeText())
+                    .applicationStatus(application.getApplicationStatus())
+                    .build();
+                }else{
+            return null;
+        }
     }
 
 

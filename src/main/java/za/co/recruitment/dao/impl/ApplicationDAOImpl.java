@@ -28,7 +28,7 @@ public class ApplicationDAOImpl implements ApplicationDAO {
 
     @Override
     public Application getApplicationByIdPerOffer(Long applicationId, Long offerId) {
-        return applicationRepository.getApplicationByIdPerOffer(offerId,applicationId);
+        return applicationRepository.getApplicationByIdPerOffer(applicationId,offerId);
     }
 
     @Override
